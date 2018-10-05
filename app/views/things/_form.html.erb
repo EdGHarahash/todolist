@@ -10,18 +10,18 @@
       </ul>
     </div>
   <% end %>
-
-  <%= f.text_field :name %>
+  <%= label_tag 'thing[name]', 'Title:'  %>
+  <%= text_field("thing", "name")%>
+  </br>
+  <%= label_tag 'thing[deadline]', 'deadline:'  %>
   <%= date_field("thing", "deadline") %>
-  <%= f.fields_for :category do |ff| %>
-    <div>
-      <%= ff.label :name %>
-      <%= ff.text_field :name %>
-    </div>
-  <% end %>
-  <input name="thing[category_attributes][name]"  type="text">
 
-<input name="thing[little_things_attributes][][body]"  type="text">
+
+<%= label_tag 'Category', 'Category'  %>
+  <input id ="Category"name="thing[category_attributes][name]"  type="text">
+</br>
+<%= label_tag 'Task1', 'Tasks:'  %> 
+<input id="Task1" name="thing[little_things_attributes][][body]"  type="text">
 <input name="thing[little_things_attributes][][body]"  type="text">
 <input name="thing[little_things_attributes][][body]"  type="text">
   <div class="actions">

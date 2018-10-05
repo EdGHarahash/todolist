@@ -27,16 +27,19 @@
 
   <tbody>
     <% @thing.little_things.each do |lt| %>
-      <tr>
-        <td><%= lt.body %></td>
-        <td><%= check_box("done", lt.id, {checked: lt.done}) %></td>
-      </tr>
+    <%= form_tag '/little_things/edit' do %>
+      <input name="little_thing[id]" value="<%= lt.id %>"  type="hidden">
+        <tr>
+          <td><%= lt.body %></td>
+          <td><%= check_box("little_thing", "done") %></td>
+          <td><%= submit_tag 'Save changes' %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
-
-<%= form_tag '/little_things/edit' do %>
+<%= form_tag '/little_things/create' do %>
 <input name="thing[little_things_attributes][][body]"  type="text">
 <input name="thing[little_things_attributes][][body]"  type="text">
 <input name="thing[little_things_attributes][][body]"  type="text">
