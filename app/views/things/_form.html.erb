@@ -1,0 +1,30 @@
+<%= form_with(model: thing, local: true) do |f| %>
+  <% if thing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(thing.errors.count, "error") %> prohibited this thing from being saved:</h2>
+
+      <ul>
+      <% thing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.text_field :name %>
+  <%= date_field("thing", "deadline") %>
+  <%= f.fields_for :category do |ff| %>
+    <div>
+      <%= ff.label :name %>
+      <%= ff.text_field :name %>
+    </div>
+  <% end %>
+  <input name="thing[category_attributes][name]"  type="text">
+
+<input name="thing[little_things_attributes][][body]"  type="text">
+<input name="thing[little_things_attributes][][body]"  type="text">
+<input name="thing[little_things_attributes][][body]"  type="text">
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

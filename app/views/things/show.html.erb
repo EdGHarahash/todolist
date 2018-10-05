@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+
+<% if @thing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@thing.errors.count, "error") %> prohibited this thing from being saved:</h2>
+
+      <ul>
+      <% @thing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<H1> THING TITLE: <%= @thing.name %> </H1>
+
+<H2> THIG CATEGORY: <%= @thing.category.name %></H2>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @thing.little_things.each do |lt| %>
+      <tr>
+        <td><%= lt.body %></td>
+        <td><%= check_box("done", lt.id, {checked: lt.done}) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= form_tag '/little_things/edit' do %>
+<input name="thing[little_things_attributes][][body]"  type="text">
+<input name="thing[little_things_attributes][][body]"  type="text">
+<input name="thing[little_things_attributes][][body]"  type="text">
+<input name="thing[id]" value="<%= @thing.id %>"  type="hidden">
+ <%= submit_tag 'Add' %>
+<% end %>
+
+<%= link_to 'Edit', edit_thing_path(@thing) %> |
+<%= link_to 'Back', things_path %>
