@@ -12,15 +12,18 @@
 
 ActiveRecord::Schema.define(version: 20181005105418) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.integer "thing_id"
+    t.bigint "thing_id"
     t.index ["thing_id"], name: "index_categories_on_thing_id"
   end
 
   create_table "categories_users", id: false, force: :cascade do |t|
-    t.integer "category_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "category_id", null: false
+    t.bigint "user_id", null: false
     t.index ["category_id"], name: "index_categories_users_on_category_id"
     t.index ["user_id"], name: "index_categories_users_on_user_id"
   end
@@ -30,14 +33,14 @@ ActiveRecord::Schema.define(version: 20181005105418) do
     t.boolean "done", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "thing_id"
+    t.bigint "thing_id"
     t.index ["thing_id"], name: "index_little_things_on_thing_id"
   end
 
   create_table "things", force: :cascade do |t|
     t.string "name"
-    t.integer "category_id"
-    t.integer "user_id"
+    t.bigint "category_id"
+    t.bigint "user_id"
     t.date "deadline"
     t.index ["category_id"], name: "index_things_on_category_id"
     t.index ["user_id"], name: "index_things_on_user_id"
@@ -55,4 +58,8 @@ ActiveRecord::Schema.define(version: 20181005105418) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "categories", "things"
+  add_foreign_key "little_things", "things"
+  add_foreign_key "things", "categories"
+  add_foreign_key "things", "users"
 end
