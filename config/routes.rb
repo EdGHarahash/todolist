@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   resources :categories
   post "little_things/edit", to: "little_things#edit"
   post "little_things/create", to: "little_things#create"
-  root to: "home#index"
+  root to: "things#index"
 end
