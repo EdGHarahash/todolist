@@ -1,20 +1,33 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
-<table class="table">
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="m-5">
+  <div class="row">
+    <div class="col">
+	  <div class="row">
+        <div class="col-4">
+          <form action=<%= new_thing_path %>>
+            <button type="submit" class="btn btn-primary">New Thing</button>
+          </form>
+ 		</div>
+        <div class="col">
+		  <h1>Things</h1>
+ 		</div>
+	  </div>
 
-  <tbody>
-    <% @things.each do |thing| %>
-      <tr>
-        <td><%= link_to thing.name, thing %></td>
-        <td><%= link_to 'Edit', edit_thing_path(thing) %></td>
-        <td><%= link_to 'Destroy', thing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% @categories.each do |ct| %>
+        <div class="row">
+          <div class="col">
+            <%= ct.name %>
+          </div>
+          <div class="col">
+          <% ct.things.each do |thing| %>
+            <div class="row">
+              <%= link_to thing.name, thing %>
+            </div>
+          <% end %>
+          </div>
+        </div>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
+      <% end %>
+      </div>
+<div class="col-1"></div>
+</div>
+</div>
