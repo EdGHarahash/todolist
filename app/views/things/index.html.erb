@@ -17,6 +17,7 @@
 </div>
 </div>
 </br>
+<% if @things %>
 <table class="table">
   <thead>
 
@@ -37,6 +38,11 @@
     <% end %>
   </tbody>
 </table>
+<%else%>
+
+Things not found. <%= link_to 'Create one?', thing_new  %>
+
+<%end%>
 </div>
 <div class="col-1"></div>
 </div>

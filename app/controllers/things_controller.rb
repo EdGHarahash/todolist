@@ -27,7 +27,7 @@ class ThingsController < ApplicationController
     @thing_params = thing_params
     @thing = Thing.new(@thing_params)
     @thing.user_id = current_user.id
-    @thing.category_id = Category.find_or_create_by(name: @thing_params[:category_attributes][:name]).id
+  #  @thing.category_id = Category.find_or_create_by(name: @thing_params[:category_attributes][:name]).id
     respond_to do |format|
       if @thing.save
         format.html { redirect_to @thing, notice: 'Thing was successfully created.' }
