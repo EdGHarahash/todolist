@@ -14,7 +14,10 @@
 
 <H1> THING TITLE: <%= @thing.name %> </H1>
 
-<H2> THIG CATEGORY: <%= @thing.category.name %></H2>
+<H2> THING CATEGORY: <%= @thing.category.name %></H2>
+
+<H2> DEADLINE: <%= @thing.deadline %></H2>
+
 
 
 
@@ -41,11 +44,9 @@
 
 <%= form_tag '/little_things/create' do %>
 <input name="thing[little_things_attributes][][body]"  type="text">
-<input name="thing[little_things_attributes][][body]"  type="text">
-<input name="thing[little_things_attributes][][body]"  type="text">
 <input name="thing[id]" value="<%= @thing.id %>"  type="hidden">
  <%= submit_tag 'Add' %>
 <% end %>
 
 <%= link_to 'Edit', edit_thing_path(@thing) %> |
-<%= link_to 'Back', things_path %>
+<%= link_to 'Back', home_index_url %>

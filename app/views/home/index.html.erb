@@ -1,5 +1,6 @@
 <div class="m-5">
   <div class="row">
+  <div class="col-1"></div>
     <div class="col">
 	  <div class="row">
         <div class="col-4">
@@ -10,9 +11,13 @@
         <div class="col">
 		  <h1>Things</h1>
  		</div>
+    <div class="col">
+    <%= link_to 'all things', things_path %>
+    </div>
 	  </div>
-
+    <% if @categories %>
       <% @categories.each do |ct| %>
+      <% unless ct.things.empty? %>
         <div class="row">
           <div class="col">
             <%= ct.name %>
@@ -20,14 +25,61 @@
           <div class="col">
           <% ct.things.each do |thing| %>
             <div class="row">
+              <div class="col">
               <%= link_to thing.name, thing %>
+              </div>
+              <div class="col">
+              <%= thing.deadline %>
+              </div>
             </div>
+            <hr>
           <% end %>
           </div>
         </div>
-      </tr>
+      <hr>
       <% end %>
-      </div>
-<div class="col-1"></div>
+      <% end %>
+    <% end %>
+    </div>
+  <div class="col-1"></div>
 </div>
 </div>
+
+
+ <% unless @today_things.empty? %>
+
+<div class="m-5">
+  <div class="row">
+  <div class="col-1"></div>
+    <div class="col">
+    <div class="row">
+        <div class="col">
+      <h1>Today Things</h1>
+    </div>
+    </div>
+        <div class="row">
+          
+          <div class="col">
+
+          <% @today_things.each do |thing| %>
+            <div class="row">
+              <div class="col">
+              <%= link_to thing.name, thing %>
+              </div>
+              <div class="col">
+            <%= thing.category.name %>
+          </div>
+              <div class="col">
+              <%= thing.deadline %>
+              </div>
+            </div>
+            <hr>
+          <% end %>
+          </div>
+        </div>
+      <hr>
+    </div>
+  <div class="col-1"></div>
+</div>
+</div>
+<% end %>

@@ -1,6 +1,31 @@
 <h1>Editing Thing</h1>
 
-<%= render 'form', thing: @thing %>
+<%= form_with(model: @thing, local: true) do |f| %>
+  <% if @thing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@thing.errors.count, "error") %> prohibited this thing from being saved:</h2>
+
+      <ul>
+      <% @thing.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= label_tag 'thing[name]', 'Title:'  %>
+  <%= text_field("thing", "name")%>
+  </br>
+  <%= label_tag 'thing[deadline]', 'deadline:'  %>
+  <%= date_field("thing", "deadline") %>
+
+
+<%= label_tag 'Category', 'Category'  %>
+  <input id ="Category"name="thing[category][name]" value=<%= @thing.category.name %>  type="text">
+</br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
 
 <%= link_to 'Show', @thing %> |
 <%= link_to 'Back', things_path %>

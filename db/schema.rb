@@ -10,15 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181005105418) do
+ActiveRecord::Schema.define(version: 20181009122859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.bigint "thing_id"
-    t.index ["thing_id"], name: "index_categories_on_thing_id"
   end
 
   create_table "categories_users", id: false, force: :cascade do |t|
@@ -58,8 +56,7 @@ ActiveRecord::Schema.define(version: 20181005105418) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "categories", "things"
-  add_foreign_key "little_things", "things"
+  add_foreign_key "little_things", "things", on_delete: :cascade
   add_foreign_key "things", "categories"
   add_foreign_key "things", "users"
 end
