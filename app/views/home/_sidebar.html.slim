@@ -1,0 +1,10 @@
+.col-4
+  .list-group
+    =link_to "Add New Task", new_task_path, class: "list-group-item list-group-item-success"
+    a href="/home/index" class="list-group-item list-group-item-info" Categories
+    =link_to "All Tasks", tasks_path, class: "list-group-item"
+    =link_to "Today", home_index_path+'?category_name=Today', class: "list-group-item"
+    =link_to "This Week", home_index_path+'?category_name=This Week', class: "list-group-item"
+    -unless @categories.empty?
+      -@categories.each do |ct|
+        =link_to ct.name, home_index_path+'?category_name='+ct.name, class: "list-group-item"

@@ -1,0 +1,19 @@
+.row
+  =render "sidebar"
+  -unless @tasks.empty?
+  .col-1
+  .col
+    .row
+      div class="col text-center"
+        h1=  @selected_category
+    .row
+      table class="table table-striped table-dark"
+        thead
+          tr
+            th scope="col" Task Title
+            th scope="col" Deadline
+        tbody
+          -@tasks.each do |t|
+            tr
+            th scope="row"=link_to t.title, t
+            td=t.deadline 

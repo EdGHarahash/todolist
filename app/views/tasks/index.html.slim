@@ -1,0 +1,32 @@
+p id="notice" = notice
+
+div class="ml-5 mr-5"
+  div class="row"
+    div class="col-1"
+    div class="col"
+      div class="row"
+        div class="col-4"
+          form action="#{new_task_path}"
+            button type="submit" class="btn btn-primary" New Task
+        div class="col"
+          h1 Tasks
+      br
+      -unless @tasks.empty?
+        table class="table"
+          thead
+            tr
+              th Thing title
+              th Category
+              th Actions
+
+          tbody
+            -@tasks.each do |task|
+              tr
+                td= link_to task.title, task
+                td= task.category.name
+                td= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }
+      -else
+        p Tasks not found. #{link_to 'Create one?', new_task_url}
+
+    div class="col-1"
+

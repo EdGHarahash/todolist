@@ -10,38 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181009122859) do
+ActiveRecord::Schema.define(version: 20181012075657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
-  create_table "categories_users", id: false, force: :cascade do |t|
-    t.bigint "category_id", null: false
-    t.bigint "user_id", null: false
-    t.index ["category_id"], name: "index_categories_users_on_category_id"
-    t.index ["user_id"], name: "index_categories_users_on_user_id"
-  end
-
-  create_table "little_things", force: :cascade do |t|
-    t.string "body"
-    t.boolean "done", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "thing_id"
-    t.index ["thing_id"], name: "index_little_things_on_thing_id"
-  end
-
-  create_table "things", force: :cascade do |t|
-    t.string "name"
+  create_table "tasks", force: :cascade do |t|
+    t.string "title"
     t.bigint "category_id"
     t.bigint "user_id"
     t.date "deadline"
-    t.index ["category_id"], name: "index_things_on_category_id"
-    t.index ["user_id"], name: "index_things_on_user_id"
+    t.boolean "done", default: false
+    t.bigint "task_id"
+    t.index ["category_id"], name: "index_tasks_on_category_id"
+    t.index ["task_id"], name: "index_tasks_on_task_id"
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -56,7 +45,7 @@ ActiveRecord::Schema.define(version: 20181009122859) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "little_things", "things", on_delete: :cascade
-  add_foreign_key "things", "categories"
-  add_foreign_key "things", "users"
+  add_foreign_key "categories", "users"
+  add_foreign_key "tasks", "categories"
+  add_foreign_key "tasks", "users"
 end

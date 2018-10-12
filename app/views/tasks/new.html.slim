@@ -1,0 +1,31 @@
+.row
+  .col-4
+  .col-md-6
+    h5 Create new Task of #{link_to "go back", home_index_path}
+    .row
+      =form_with(model: @task, local: true, class:"form-horizontal text-center") do |f|
+        -if @task.errors.any?
+          div id="error_explanation"
+            h2 #{pluralize(@task.errors.count, "error")}  prohibited this task from being saved:
+            ul
+            -@task.errors.full_messages.each do |message|
+              li=message
+        =label_tag 'task[title]', 'Title:'
+        =text_field("task", "title", class: "input-md textinput textInput form-control")
+        br
+        =label_tag 'task[deadline]', 'deadline:'
+        =date_field("task", "deadline", class: "input-md textinput textInput form-control")
+        br
+        =label_tag 'Category', 'Category'
+        input id ="Category" name="task[category][name]"  type="text" class="form-control"
+        br
+        =label_tag 'SubTask1', 'Subtasks:'
+        br
+        input id="SubTask1" name="task[sub_tasks_attributes][][title]"  type="text" class="input-md emailinput form-control"
+        br
+        input name="task[sub_tasks_attributes][][title]"  type="text" class="input-md emailinput form-control"
+        br
+        input name="task[sub_tasks_attributes][][title]" type="text" class="input-md emailinput form-control"
+        br
+        div class="actions"
+          =f.submit
